@@ -3,7 +3,7 @@ import {useStateValue} from '../services/auth/hooks';
 import {getData, getLng} from '../storage/asyncStore';
 import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
-// import SplashScreen from 'react-native-splash-screen';
+import SplashScreen from 'react-native-splash-screen';
 
 const Navigation = props => {
   const [{user}, dispatch] = useStateValue();
@@ -21,8 +21,10 @@ const Navigation = props => {
   }, []);
 
   useEffect(() => {
-    if (loading) return;
-    // SplashScreen.hide();
+    if (loading){
+      return SplashScreen.show();
+    }
+    SplashScreen.hide();
   }, [loading]);
 
   // TODO need to set a loading screen till the navigator gets the auth data and load the final navigator
