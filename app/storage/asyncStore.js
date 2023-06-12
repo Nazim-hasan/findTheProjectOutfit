@@ -1,0 +1,50 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const key = 'authUser';
+const lngKey = 'lngKey';
+
+const storeData = async value => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+  } catch (e) {
+    alert(e);
+  }
+};
+
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem(key);
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    alert(e);
+  }
+};
+
+const removeData = async () => {
+  try {
+    await AsyncStorage.removeItem(key);
+  } catch (e) {
+    alert(e);
+  }
+};
+
+const storeLng = async value => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(lngKey, jsonValue);
+  } catch (e) {
+    alert(e);
+  }
+};
+
+const getLng = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem(lngKey);
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    alert(e);
+  }
+};
+
+export {storeData, storeLng, getData, getLng, removeData};

@@ -1,0 +1,66 @@
+export const routes = {
+  //AuthNavigator
+  loginScreen: 'LoginScreen',
+  emailLoginScreen: 'emailLogin',
+  passResetScreen: 'passReset',
+  signUpScreen: 'signUp',
+  
+  // BottomTabNavigator
+  homeScreen: 'home',
+  profileScreen: 'profile',
+  PolicyScreen: 'policy',
+  claimsScreen: 'claims',
+  contactScreen: 'contact',
+
+  //health insurance
+  HealthPlanSelectionFormScreen: 'HealthPlanSelect',
+  HealthPlanSelectionFormInfoScreen: 'HealthPlanSelectionFormInfoScreen',
+  HealthPlanListScreen: 'HealthPlanList',
+  HealthPlanDetailsScreen: 'HealthPlanDetails',
+  HealthCheckOutScreen: 'HealthCheckOut',
+  HealthBillingInfoScreen: 'HealthBillingInfo',
+
+  //accident insurance
+  lHABimasScreen: 'lHAScr',
+  AccidentPlansScreen: 'AccidentPlansScreen',
+  AccidentInsuredDetailsScreen: 'AccidentInsuredDetailsScreen',
+
+
+  editUserScreen: 'editUsr',
+  ScanQrCodeScreen: 'ScanQrCode',
+  NotificationsScreen: 'NotificationsScreen',
+  NotificationDetailsScreen: 'NotificationDetailsScreen',
+  BlogScreen: 'BlogScreen',
+  BlogDetails: 'BlogDetails',
+  BlogsScreen: 'BlogsScreen',
+  vehicleInsuranceScreen: 'vhclInsScr',
+  VehicleInsuDetailsScreen: 'vhclInsDetailsScr',
+  motorDetailScreen: 'mtrDtlScr',
+  travelInsScreen: 'trvlInsScr',
+  travelDetailScreen: 'trvlDtlScr',
+  travelPackagesScreen: 'trvlPkgsScr',
+  usrDtlQtScreen: 'usrDtlQtScr',
+  checkOutScreen: 'chkOutScr',
+  enrlMntLstScreen: 'enrlmntLstScr',
+  AboutUsScreen: 'AboutUsScreen',
+  pPToSScreen: 'pPToSScr',
+  ordersScreen: 'ordrsScr',
+  corporateSlnScreen: 'crprtSlnScr',
+  QrEnrlmntFormScreen: 'QrEnrlmntFormScreen',
+  enrlmntFormScreen: 'enrlmntFormScr',
+  motorPackagesScreen: 'mtrPckScr',
+  motorUsrDtlQtScreen: 'mtrUsrDtlScr',
+  motorCheckOutScreen: 'mtrChkOutScr',
+  orderDetailScreen: 'ordrDtlScr',
+  CoverageDetailsScreen: 'cvrgDtlScr',
+  stUsrDtlScreen: 'stUsrDtlScr',
+  AccidentCheckoutScreen: 'AccidentCheckoutScreen',
+  myClaimsScreen: 'myClmsScr',
+  claimDetailScreen: 'clmDtlScr',
+  changePassScreen: 'cngPssScr',
+  claimFormScreen: 'clmFrmScr',
+  ClaimFormDetailsScreen: 'ClaimFormDetailsScreen',
+  claimNowFormScreen: 'clmNowFrmScr',
+  CompareScreen: 'CompareScreen',
+  ClaimFormBtoBScreen: 'ClaimFormBtoBScreen'
+};
