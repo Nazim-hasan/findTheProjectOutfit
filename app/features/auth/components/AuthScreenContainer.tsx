@@ -1,14 +1,26 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native'
 import React from 'react'
+import { colors } from 'theme/colors'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-const AuthScreenContainer = () => {
+type ComponentProps = {
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
+};
+
+const AuthScreenContainer = ({ children }: ComponentProps) => {
   return (
-    <View>
-      <Text>AuthScreenContainer</Text>
-    </View>
+    <SafeAreaProvider style={styles.container}>
+      {children}
+    </SafeAreaProvider>
   )
 }
 
 export default AuthScreenContainer
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.white,
+    flex: 1
+  }
+})

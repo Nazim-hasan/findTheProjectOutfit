@@ -5,16 +5,17 @@ import { useStateValue } from '../../../services/auth/hooks'
 import LogoSVG from '../../../../assets/images/svg/LogoSVG'
 import SvgLoader from 'components/common/SvgLoader'
 import Text from 'components/common/text/Text'
+import AuthScreenContainer from '../components/AuthScreenContainer'
 
 const LoginScreen = () => {
   const [{appSettings}] = useStateValue();
   return (
-    <View>
+    <AuthScreenContainer>
       <Text preset="heading">{__('loginScreen.title', appSettings.lng)}</Text>
       <Text preset='RegularXl'>LoginScreen</Text>
       <Text>LoginScreen</Text>
       <SvgLoader size={150} component={LogoSVG} />
-    </View>
+    </AuthScreenContainer>
   )
 }
 
