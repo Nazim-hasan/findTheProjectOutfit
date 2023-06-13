@@ -1,0 +1,1 @@
+export type ColorStatus = 'primary' | 'success' | 'danger' | 'info' | 'warning' | 'basic' | 'hint' | 'disabled'

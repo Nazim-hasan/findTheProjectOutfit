@@ -1,7 +1,9 @@
 export const colors = {
-  black: "#151515",
-  darkGrey: "#242424",
-  green: "#4EE1A0",
-  grey: "#D9D9D9",
+  primary: "#4897E9",
+  lightGrey: "#F2F3F3",
+  gray: "#818688",
+  darkGray: '#2E3539',
+  black: "#131517",
   white: "#FFFFFF",
 };
+ 
