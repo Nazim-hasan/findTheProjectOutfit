@@ -4,6 +4,6 @@
     "loginScr": "loginScr"
   },
   "loginScreen": {
-    "title": "Login"
+    "welcome": "Welcome back!"
   }
 }

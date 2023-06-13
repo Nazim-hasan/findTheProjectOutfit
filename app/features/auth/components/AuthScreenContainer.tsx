@@ -5,12 +5,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 type ComponentProps = {
   children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
+  customStyles?: StyleProp<ViewStyle>;
 };
 
-const AuthScreenContainer = ({ children }: ComponentProps) => {
+const AuthScreenContainer = ({ children,customStyles }: ComponentProps) => {
   return (
-    <SafeAreaProvider style={styles.container}>
+    <SafeAreaProvider style={[styles.container, customStyles]}>
       {children}
     </SafeAreaProvider>
   )
