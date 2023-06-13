@@ -1,3 +1,41 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json"
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["app/*"],
+      "assets/*": ["./assets/*"],
+      "plugins/*":["./plugins/*"],
+      "components/*": ["app/components/*"],
+      "navigation/*": ["app/navigation/*"],
+      "constants/*": ["app/constants/*"],
+      "screens/*": ["app/screens/*"],
+      "hooks/*": ["app/hooks/*"],
+      "context/*": ["app/context/*"],
+      "language/*": ["app/language/*"],
+      "lib/*": ["app/lib/*"],
+      "config/*": ["app/config/*"],
+      "api/*": ["app/api/*"],
+      "services/*": ["app/services/*"],
+      "schema/*": ["app/schema/*"],
+      "models/*": ["app/models/*"],
+      "theme": ["app/theme/*"],
+      "store/*": ["app/store/*"],
+      "tailwind": ["app/lib/tailwind.js"],
+      "colors": ["./colors.js"],
+      "features": ["app/features"]
+    },
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react-native",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "esnext"
+  },
 }

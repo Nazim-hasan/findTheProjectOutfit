@@ -1,15 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import SVGLoader from '../../../components/common/SvgLoader'
+import { __ } from '../../../language/stringPicker'
+import { useStateValue } from '../../../services/auth/hooks'
 import LogoSVG from '../../../../assets/images/svg/LogoSVG'
+import SvgLoader from 'components/common/SvgLoader'
+import Text from 'components/common/text/Text'
 
 const LoginScreen = () => {
+  const [{appSettings}] = useStateValue();
   return (
     <View>
-      <Text style={styles.text}>LoginScreen</Text>
-      <Text style={styles.text2}>LoginScreen</Text>
-      <Text style={styles.text3}>LoginScreen</Text>
-      <SVGLoader size={150} component={LogoSVG} />
+      <Text preset="heading">{__('loginScreen.title', appSettings.lng)}</Text>
+      <Text preset='RegularXl'>LoginScreen</Text>
+      <Text>LoginScreen</Text>
+      <SvgLoader size={150} component={LogoSVG} />
     </View>
   )
 }

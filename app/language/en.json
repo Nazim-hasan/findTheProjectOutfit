@@ -2,5 +2,8 @@
   "routeNames": {
     "homeNav": "Home",
     "loginScr": "loginScr"
+  },
+  "loginScreen": {
+    "title": "Login"
   }
 }
