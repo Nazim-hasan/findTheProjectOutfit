@@ -1,26 +1,44 @@
-import { StyleSheet, TouchableOpacity, View, Dimensions } from "react-native";
-import React from "react";
+import { StyleSheet, TouchableOpacity, View, Dimensions, Pressable } from "react-native";
+import React, { useCallback, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Text from "../text/Text";
 import { colors } from "theme/colors";
 import Feather from 'react-native-vector-icons/Feather';
+import CustomBottomSheet, { BottomSheetForwardRefType } from "../custom-bottom-sheet/CustomBottomSheet";
 const { width: wWidth } = Dimensions.get("window");
 const CustomHeader = ({ title = "",  headerTransparent = false  }) => {
   const navigation = useNavigation<any>();
+  const customSheetRef = useRef<BottomSheetForwardRefType>(null)
+
+  const handlePresentModalPress = useCallback(() => {
+      customSheetRef?.current?.activateSheet()
+  }, []);
+
+  const onCloseSheet = () => {
+      customSheetRef?.current?.closeSheet()
+  }
   return (
     <View style={styles.headerContainer}>
       <View style={{flexDirection: "row", alignItems: 'center'}}>
         <View style={{flex: 6}}>
           <Text preset="heading">EXPLORE</Text>
         </View>
-        <View style={{flex: 1, alignItems: 'flex-end'}}>
+        <Pressable onPress={handlePresentModalPress} style={{flex: 1, alignItems: 'flex-end'}}>
         <Feather
               name="plus"
               size={30}
               color={colors.darkGray }
             />
-        </View>
+        </Pressable>
       </View>
+      <CustomBottomSheet
+                title="Create New Collection"
+                ref={customSheetRef}
+            >
+                <View>
+                  {/* <Text>Hi</Text> */}
+                </View>
+            </CustomBottomSheet>
 
       {/* <View style={styles.headerBox}>
         <View style={styles.backArrow}>
