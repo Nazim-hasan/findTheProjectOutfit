@@ -1,7 +1,8 @@
 {
   "routeNames": {
     "homeNav": "Home",
-    "loginScr": "loginScr"
+    "loginScr": "loginScr",
+    "deletedList": "Deleted List"
   },
   "loginScreen": {
     "welcome": "Welcome back!"

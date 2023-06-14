@@ -32,6 +32,7 @@ module.exports = function (api) {
             features: './app/features'
           },
         },
+        'react-native-reanimated/plugin'
       ]
     ],
   };

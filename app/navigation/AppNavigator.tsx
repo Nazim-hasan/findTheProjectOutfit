@@ -9,7 +9,7 @@ import BottomTabNavigator from "./BottomTabNavigator";
 const Stack = createNativeStackNavigator<AppRootStackParamList>();
 
 const StackNavigator = () => {
-  // const [{ appSettings }] = useStateValue();
+  
 
 
   return (
