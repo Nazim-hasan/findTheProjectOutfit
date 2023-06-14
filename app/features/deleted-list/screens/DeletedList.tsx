@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const HomeScreen = () => {
+const DeletedList = () => {
   return (
     <View>
-      <Text>Home</Text>
+      <Text>DeletedList</Text>
     </View>
   )
 }
 
-export default HomeScreen
+export default DeletedList
 
 const styles = StyleSheet.create({})

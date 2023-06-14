@@ -14,15 +14,25 @@ export type AuthStackParamList = {
 };
 
 export type AppRootStackParamList = {
+  Root: NavigatorScreenParams<RootDrawerParamList> | undefined;
   // Root: NavigatorScreenParams<RootDrawerParamList> | undefined;
   HomeScreen: undefined,
+};
+export type RootDrawerParamList = {
+  ["FindOutfit"]: NavigatorScreenParams<RootTabParamList> | undefined; // Home
+  // Support: undefined;
 };
 
 export type RootTabParamList = {
   HomeScreen: undefined,
-  ProfileScreen: undefined,
+  DeletedList: undefined,
   PolicyScreen: undefined,
   ClaimsScreen: undefined,
   ContactScreen: undefined,
 };
+
+export type RootDrawerScreenProps<Screen extends keyof RootDrawerParamList> =
+  NativeStackScreenProps<RootDrawerParamList, Screen>;
+
+
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<BottomTabScreenProps<RootTabParamList, Screen>, NativeStackScreenProps<AppRootStackParamList>>;

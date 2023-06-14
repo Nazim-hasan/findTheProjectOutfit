@@ -2,22 +2,11 @@ import {AuthContextProps} from '../contexts/stateContext'
 
 const reducer = (state: AuthContextProps, action:any) => {
   switch (action.type) {
-    case 'SET_AUTH_DATA':
-      if (action.data.user !== undefined && action.data.token !== undefined) {
+    case 'SET_USER':
+      if (action.user !== undefined) {
         return {
           ...state,
-          user: action.data.user,
-          token: action.data.token,
-        };
-      } else if (action.data.user === undefined && action.data.token) {
-        return {
-          ...state,
-          token: action.data.token,
-        };
-      } else if (action.data.user && action.data.token === undefined) {
-        return {
-          ...state,
-          user: action.data.user,
+          user: action.user,
         };
       }
       return state;
@@ -26,13 +15,6 @@ const reducer = (state: AuthContextProps, action:any) => {
       return {
         ...state,
         appSettings: action.appSettings,
-      };
-
-
-    case 'IS_CONNECTED':
-      return {
-        ...state,
-        is_connected: action.is_connected,
       };
 
     default:

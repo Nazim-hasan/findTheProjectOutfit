@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // import { __ } from "../language/stringPicker";
 import { AppRootStackParamList } from "../models/navigations";
 import HomeScreen from "../features/home/screen";
+import BottomTabNavigator from "./BottomTabNavigator";
 
 const Stack = createNativeStackNavigator<AppRootStackParamList>();
 
@@ -12,18 +13,17 @@ const StackNavigator = () => {
 
 
   return (
-    <Stack.Navigator>
-      {/* <Stack.Screen
+    <Stack.Navigator initialRouteName="Root">
+      <Stack.Screen
         name="Root"
-        component={HomeScreen}
+        component={BottomTabNavigator}
         options={{
           headerShown: false
         }}
-      /> */}
+      />
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        
       />
     </Stack.Navigator>
   );

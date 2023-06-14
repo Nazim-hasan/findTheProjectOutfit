@@ -5,7 +5,6 @@ import {metrics} from 'theme/metrics';
 
 export default function Divider({customStyle = {}}) {
   const {width} = Dimensions.get('window');
-  console.log('width',width)
   return (
     <View
       style={[

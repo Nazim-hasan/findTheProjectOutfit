@@ -15,6 +15,7 @@ import Button from 'components/common/button/Button';
 import Divider from 'components/common/divider/Divider';
 import facebookSVG from 'assets/images/svg/facebookSVG';
 import googleSVG from 'assets/images/svg/googleSVG';
+import { storeData } from 'storage/asyncStore';
 
 
 const LoginScreen = () => {
@@ -27,6 +28,16 @@ const LoginScreen = () => {
   const eyeCloseIcon = (
     <Ionicons name="ios-eye-off" size={20} color={colors.gray} />
   );
+  const [{user},dispatch] = useStateValue();
+
+  const handleLogin = () => {
+    storeData(true)
+    dispatch({
+      type: "SET_USER",
+      user: true
+    });
+  }
+
   const [{appSettings}] = useStateValue();
   return (
     <AuthScreenContainer customStyles={{paddingHorizontal: metrics.spacing.m}}>
@@ -59,7 +70,7 @@ const LoginScreen = () => {
             }}
             rightIcon={eyeOpenIcon}
           />
-          <Button customStyles={{}} title="Log In" onPress={() => {}} />
+          <Button customStyles={{}} title="Log In" onPress={handleLogin} />
         </View>
         <View style={{marginVertical: metrics.spacing.l}}>
           <Text
