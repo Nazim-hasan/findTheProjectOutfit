@@ -21,7 +21,6 @@ const {width: wWidth} = Dimensions.get('window');
 const CustomHeader = ({title = '', headerTransparent = false}) => {
   const route = useRoute();
   const currentScreenName = route.name;
-  console.log('currentScreenName', currentScreenName);
   const customSheetRef = useRef<BottomSheetForwardRefType>(null);
 
   const handlePresentModalPress = useCallback(() => {

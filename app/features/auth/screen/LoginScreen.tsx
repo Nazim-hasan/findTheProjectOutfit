@@ -1,7 +1,7 @@
 import {StyleSheet, View, TouchableOpacity, Dimensions} from 'react-native';
 import React, {useState} from 'react';
 import {__} from '../../../language/stringPicker';
-import {useStateValue} from '../../../services/auth/hooks';
+import {useAuthFunction, useStateValue} from '../../../services/auth/hooks';
 import LogoSVG from 'assets/images/svg/LogoSVG';
 import SvgLoader from 'components/common/SvgLoader';
 import AuthScreenContainer from '../components/AuthScreenContainer';
@@ -35,16 +35,10 @@ const LoginScreen = () => {
   //UI state
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  
+  const {handleLogin} = useAuthFunction();
 
-  const handleLogin = () => {
-
-
-    storeData(true);
-    dispatch({
-      type: 'SET_USER',
-      user: true,
-    });
+  const handlePressLogin = () => {
+    handleLogin('email')
   };
 
   const [{appSettings}] = useStateValue();
@@ -85,7 +79,7 @@ const LoginScreen = () => {
             setShowPassword={setShowPassword}
             secureTextEntry={showPassword}
           />
-          <Button customStyles={{}} title="Log In" onPress={handleLogin} />
+          <Button customStyles={{}} title="Log In" onPress={handlePressLogin} />
         </KeyboardAvoidingView>
         <View style={{marginVertical: metrics.spacing.l}}>
           <Text

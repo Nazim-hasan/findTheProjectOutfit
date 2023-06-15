@@ -1,9 +1,17 @@
 import React from 'react'
 import { useStateValue } from './useStateValue';
-import { removeData } from '../../../storage/asyncStore';
+import { removeData, storeData } from '../../../storage/asyncStore';
 
 const useAuthFunction = () => {
     const [{ user, token, appSettings }, dispatch] = useStateValue();
+
+    const handleLogin = (value: string) => {
+        dispatch({
+            type: 'SET_USER',
+            user: true
+        });
+        storeData(value)
+    }
 
     const handleLogout = () => {
         dispatch({
@@ -13,7 +21,7 @@ const useAuthFunction = () => {
         removeData();
     };
 
-    return { handleLogout }
+    return { handleLogout, handleLogin }
 }
 
 export default useAuthFunction

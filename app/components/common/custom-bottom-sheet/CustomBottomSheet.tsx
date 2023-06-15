@@ -45,7 +45,6 @@ const CustomBottomSheet = React.forwardRef<
   const handleSheetChanges = useCallback((index: number) => {
     bottomSheetRef?.current?.snapToIndex(index);
     setSnapIndex(index);
-    // console.log('handleSheetChanges', index);
   }, []);
 
   const handlePresentModalPress = useCallback(() => {

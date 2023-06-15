@@ -20,7 +20,6 @@ const CustomBackButton = ({
 }: TextProps) => {
   const navigation = useNavigation<any>();
   const handleBack = () => {
-    console.log('click')
     if(isBottomSheet && onCloseSheet){
       onCloseSheet()
     }else{

@@ -6,7 +6,6 @@ import Text from 'components/common/text/Text';
 import Button from 'components/common/button/Button';
 
 const BrandCard = ({item}) => {
-  console.log('item', item);
   return (
     <View style={styles.cardContainer}>
       <View style={styles.imageContainer}>

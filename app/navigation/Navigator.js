@@ -10,7 +10,6 @@ const Navigation = props => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('user', user)
     if (user) {
       return;
     }
@@ -49,9 +48,7 @@ const Navigation = props => {
 
     dispatch({
       type: 'SET_USER',
-      data: {
-        user: storedAuth.user,
-      },
+      user: true,
     });
     setLoading(false);
   };
