@@ -1,4 +1,4 @@
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Dimensions} from 'react-native';
 import React, {useState} from 'react';
 import {__} from '../../../language/stringPicker';
 import {useStateValue} from '../../../services/auth/hooks';
@@ -15,8 +15,10 @@ import Button from 'components/common/button/Button';
 import Divider from 'components/common/divider/Divider';
 import facebookSVG from 'assets/images/svg/facebookSVG';
 import googleSVG from 'assets/images/svg/googleSVG';
-import { storeData } from 'storage/asyncStore';
+import {storeData} from 'storage/asyncStore';
+import {KeyboardAvoidingView} from 'react-native';
 
+const height = Dimensions.get('window').height;
 
 const LoginScreen = () => {
   const [title, setTitle] = useState('');
@@ -28,15 +30,22 @@ const LoginScreen = () => {
   const eyeCloseIcon = (
     <Ionicons name="ios-eye-off" size={20} color={colors.gray} />
   );
-  const [{user},dispatch] = useStateValue();
+  const [{user}, dispatch] = useStateValue();
+
+  //UI state
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  
 
   const handleLogin = () => {
-    storeData(true)
+
+
+    storeData(true);
     dispatch({
-      type: "SET_USER",
-      user: true
+      type: 'SET_USER',
+      user: true,
     });
-  }
+  };
 
   const [{appSettings}] = useStateValue();
   return (
@@ -48,9 +57,13 @@ const LoginScreen = () => {
         <Text preset="heading" centered customStyles={styles.welcomeText}>
           {__('loginScreen.welcome', appSettings.lng)}
         </Text>
-        <View style={{marginTop: metrics.spacing.m}}>
+        <KeyboardAvoidingView
+          keyboardVerticalOffset={height + 47}
+          behavior="padding"
+          enabled
+          style={{marginTop: metrics.spacing.m}}>
           <Input
-            placeholder={'Email Address'}
+            placeholder={__('loginScreen.loginForm.emailHolder', appSettings.lng)}
             onChangeText={text => {
               setTitle(text);
             }}
@@ -60,7 +73,7 @@ const LoginScreen = () => {
             }}
           />
           <Input
-            placeholder={'Password'}
+            placeholder={__('loginScreen.loginForm.passHolder', appSettings.lng)}
             onChangeText={text => {
               setTitle(text);
             }}
@@ -68,16 +81,18 @@ const LoginScreen = () => {
             customStyles={{
               borderRadius: metrics.spacing.s,
             }}
-            rightIcon={eyeOpenIcon}
+            rightIcon={showPassword ? eyeCloseIcon : eyeOpenIcon}
+            setShowPassword={setShowPassword}
+            secureTextEntry={showPassword}
           />
           <Button customStyles={{}} title="Log In" onPress={handleLogin} />
-        </View>
+        </KeyboardAvoidingView>
         <View style={{marginVertical: metrics.spacing.l}}>
           <Text
             centered
             preset="SemiBoldBody"
             customStyles={{color: colors.primary}}>
-            Forget Password?
+            {__('loginScreen.forgetPass', appSettings.lng)}
           </Text>
           <Divider
             customStyle={{
@@ -96,7 +111,7 @@ const LoginScreen = () => {
             marginHorizontal: metrics.spacing.xl,
           }}>
           <Divider customStyle={{width: 80}} />
-          <Text>Or, Log in with</Text>
+          <Text>{__('loginScreen.loginAlterCaption', appSettings.lng)}</Text>
           <Divider customStyle={{width: 80}} />
         </View>
         <View
@@ -115,7 +130,7 @@ const LoginScreen = () => {
               marginHorizontal: metrics.spacing.m,
               paddingVertical: metrics.spacing.s,
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
             }}>
             <SvgLoader size={23} component={googleSVG} />
           </TouchableOpacity>
@@ -129,7 +144,7 @@ const LoginScreen = () => {
               marginHorizontal: metrics.spacing.m,
               paddingVertical: metrics.spacing.s,
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
             }}>
             <SvgLoader size={30} component={facebookSVG} />
           </TouchableOpacity>
@@ -150,8 +165,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 2,
   },
-  welcomeText: {
-  },
+  welcomeText: {},
   bottomContainer: {
     flex: 1,
   },

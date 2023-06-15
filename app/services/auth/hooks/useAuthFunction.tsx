@@ -7,11 +7,8 @@ const useAuthFunction = () => {
 
     const handleLogout = () => {
         dispatch({
-            type: 'SET_AUTH_DATA',
-            data: {
-                user: null,
-                token: null,
-            },
+            type: 'SET_USER',
+            user: false
         });
         removeData();
     };

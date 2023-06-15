@@ -7,6 +7,12 @@
     "profileScr": ""
   },
   "loginScreen": {
-    "welcome": "Welcome back!"
+    "welcome": "Welcome back!",
+    "forgetPass": "Forget Password?",
+    "loginAlterCaption": "Or, Log in with",
+    "loginForm": {
+      "emailHolder": "Email Address",
+      "passHolder": "Password"
+    }
   }
 }

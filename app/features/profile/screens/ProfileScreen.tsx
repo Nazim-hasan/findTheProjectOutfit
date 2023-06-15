@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Container} from 'layout';
 import {colors} from 'theme/colors';
@@ -6,8 +6,11 @@ import SvgLoader from 'components/common/SvgLoader';
 import personSVG from 'assets/images/svg/personSVG';
 import Text from 'components/common/text/Text';
 import {metrics} from 'theme/metrics';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useAuthFunction} from 'services/auth/hooks';
 
 const ProfileScreen = () => {
+  const {handleLogout} = useAuthFunction();
   return (
     <Container
       customStyles={{
@@ -73,6 +76,30 @@ const ProfileScreen = () => {
           Lorem ipsum dolor sit amet, consectetur elit. In augue semper arcu
           enim viverra sit ipsum. Lorem ipsum dolor sit amet consectetur elit.
         </Text>
+        <Pressable
+          onPress={handleLogout}
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            marginBottom: metrics.spacing.s,
+          }}>
+          <View
+            style={{
+              alignSelf: 'flex-end',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}>
+            <MaterialIcons name="logout" size={25} color={colors.darkGray} />
+            <Text
+              preset="MediumSm"
+              customStyles={{
+                color: colors.gray,
+                marginLeft: metrics.spacing.s,
+              }}>
+              Logout
+            </Text>
+          </View>
+        </Pressable>
       </View>
     </Container>
   );
