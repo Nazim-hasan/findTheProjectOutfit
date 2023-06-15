@@ -3,7 +3,8 @@
     "homeNav": "Home",
     "loginScr": "loginScr",
     "deletedList": "Deleted List",
-    "notificationScr": "Notification"
+    "notificationScr": "Notification",
+    "profileScr": ""
   },
   "loginScreen": {
     "welcome": "Welcome back!"

@@ -34,7 +34,7 @@ const CustomHeader = ({title = '', headerTransparent = false}) => {
         return navigate('NotificationScreen');
   
       case 'profile':
-        return navigate('NotificationScreen');
+        return navigate('ProfileScreen');
   
       default:
         return;

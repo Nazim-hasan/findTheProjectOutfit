@@ -17,7 +17,8 @@ export type AppRootStackParamList = {
   Root: NavigatorScreenParams<RootDrawerParamList> | undefined;
   // Root: NavigatorScreenParams<RootDrawerParamList> | undefined;
   HomeScreen: undefined,
-  NotificationScreen: undefined
+  NotificationScreen: undefined,
+  ProfileScreen: undefined,
 };
 export type RootDrawerParamList = {
   ["FindOutfit"]: NavigatorScreenParams<RootTabParamList> | undefined; // Home

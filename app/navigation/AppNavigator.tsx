@@ -9,6 +9,7 @@ import NotificationScreen from "features/notifications/screens/NotificationScree
 import Header from "components/common/custom-header/Header";
 import { useStateValue } from "services/auth/hooks";
 import { __ } from "language/stringPicker";
+import ProfileScreen from "features/profile/screens/ProfileScreen";
 
 const Stack = createNativeStackNavigator<AppRootStackParamList>();
 
@@ -38,6 +39,16 @@ const StackNavigator = () => {
           headerTransparent: true,
           header: (props) => (
             <Header title={__("routeNames.notificationScr", 'en')} headerTransparent={true}/>
+          )
+        }}
+      />
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{
+          headerTransparent: true,
+          header: (props) => (
+            <Header title={__("routeNames.profileScr", 'en')} headerTransparent={true}/>
           )
         }}
       />
