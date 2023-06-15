@@ -106,6 +106,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 10,
     top: metrics.spacing.m,
-    right: metrics.spacing.l, // Adjust this value to change the position of the icon inside the TextInput
+    right: metrics.spacing.s, // Adjust this value to change the position of the icon inside the TextInput
   },
 });
