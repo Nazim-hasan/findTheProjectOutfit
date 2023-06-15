@@ -7,6 +7,7 @@ import {metrics} from 'theme/metrics';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Text from 'components/common/text/Text';
 import BrandList from 'features/brand/components/BrandList';
+import CustomSearchBox from 'components/common/custom-search-box/CustomSearchBox';
 const DeletedList = () => {
   const [title, setTitle] = useState('');
   const searchIcon = (
@@ -15,33 +16,10 @@ const DeletedList = () => {
 
   return (
     <Container>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: colors.white,
-          paddingHorizontal: metrics.spacing.m,
-        }}>
-        <Input
-          placeholder={'Search here...'}
-          onChangeText={text => {
-            setTitle(text);
-          }}
-          leftIcon={searchIcon}
-          customStyles={{
-            borderRadius: metrics.spacing.s,
-          }}
-        />
-      </View>
-      <View
-        style={{
-          flex: 8,
-          paddingVertical: metrics.spacing.l,
-          paddingHorizontal: metrics.spacing.m,
-        }}>
+      <CustomSearchBox />
+      <View style={styles.brandListContainer}>
         <Text preset="body">Top street-style brands</Text>
-        <View>
-          <BrandList />
-        </View>
+        <BrandList />
       </View>
     </Container>
   );
@@ -49,4 +27,10 @@ const DeletedList = () => {
 
 export default DeletedList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  brandListContainer: {
+    flex: 8,
+    paddingVertical: metrics.spacing.l,
+    paddingHorizontal: metrics.spacing.m,
+  },
+});

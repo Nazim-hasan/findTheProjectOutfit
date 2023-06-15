@@ -15,6 +15,7 @@ interface InputProps {
   value?: string;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
+  buttonTextStyle?: TextStyle | ViewStyle | TextStyle[] | ViewStyle[];
 }
 
 export default function Input({
@@ -29,6 +30,7 @@ export default function Input({
   value,
   leftIcon,
   rightIcon,
+  buttonTextStyle
 }: InputProps) {
   return (
     <View style={styles.inputContainer}>
@@ -36,7 +38,7 @@ export default function Input({
       <TextInput
         placeholder={placeholder}
         onChangeText={onChangeText}
-        style={[styles.input, customStyles]}
+        style={[styles.input, customStyles, leftIcon ? {paddingLeft: 40} : {paddingLeft: metrics.spacing.sm}, buttonTextStyle]}
         placeholderTextColor={colors.gray}
         onBlur={onBlur}
         secureTextEntry={secureTextEntry}
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.white,
     borderBottomWidth: 1,
     marginBottom: metrics.spacing.m,
-    fontFamily: "body",
+    fontFamily: "body"
   },
   input: {
     borderColor: colors.lightGrey,
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     marginBottom: metrics.spacing.xs,
     fontFamily: "body",
     flex: 1,
-    paddingLeft: 40, // Adjust this value to change the position of the text inside the TextInput
+     // Adjust this value to change the position of the text inside the TextInput
   },
   leftIconContainer: {
     position: "absolute",

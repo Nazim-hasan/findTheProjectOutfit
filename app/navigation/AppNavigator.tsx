@@ -5,10 +5,16 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppRootStackParamList } from "../models/navigations";
 import HomeScreen from "../features/home/screen";
 import BottomTabNavigator from "./BottomTabNavigator";
+import NotificationScreen from "features/notifications/screens/NotificationScreen";
+import Header from "components/common/custom-header/Header";
+import { useStateValue } from "services/auth/hooks";
+import { __ } from "language/stringPicker";
 
 const Stack = createNativeStackNavigator<AppRootStackParamList>();
 
 const StackNavigator = () => {
+
+  const {appSettings} = useStateValue();
   
 
 
@@ -25,6 +31,17 @@ const StackNavigator = () => {
         name="HomeScreen"
         component={HomeScreen}
       />
+      <Stack.Screen
+        name="NotificationScreen"
+        component={NotificationScreen}
+        options={{
+          headerTransparent: true,
+          header: (props) => (
+            <Header title={__("routeNames.notificationScr", 'en')} headerTransparent={true}/>
+          )
+        }}
+      />
+      
     </Stack.Navigator>
   );
 };

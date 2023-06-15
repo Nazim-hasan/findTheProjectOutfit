@@ -1,44 +1,90 @@
-import { StyleSheet, TouchableOpacity, View, Dimensions, Pressable } from "react-native";
-import React, { useCallback, useRef } from "react";
-import { useNavigation } from "@react-navigation/native";
-import Text from "../text/Text";
-import { colors } from "theme/colors";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Dimensions,
+  Pressable,
+} from 'react-native';
+import React, {useCallback, useRef} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import Text from '../text/Text';
+import {colors} from 'theme/colors';
 import Feather from 'react-native-vector-icons/Feather';
-import CustomBottomSheet, { BottomSheetForwardRefType } from "../custom-bottom-sheet/CustomBottomSheet";
-const { width: wWidth } = Dimensions.get("window");
-const CustomHeader = ({ title = "",  headerTransparent = false  }) => {
-  const navigation = useNavigation<any>();
-  const customSheetRef = useRef<BottomSheetForwardRefType>(null)
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import CustomBottomSheet, {
+  BottomSheetForwardRefType,
+} from '../custom-bottom-sheet/CustomBottomSheet';
+import AddBrand from 'features/add-brand/components/AddBrand';
+import {navigate} from 'navigation/helpers';
+import { metrics } from 'theme/metrics';
+const {width: wWidth} = Dimensions.get('window');
+const CustomHeader = ({title = '', headerTransparent = false}) => {
+  const route = useRoute();
+  const currentScreenName = route.name;
+  console.log('currentScreenName', currentScreenName);
+  const customSheetRef = useRef<BottomSheetForwardRefType>(null);
 
   const handlePresentModalPress = useCallback(() => {
-      customSheetRef?.current?.activateSheet()
+    customSheetRef?.current?.activateSheet();
   }, []);
 
+  const handleNavigation = (type: string) => {
+    switch (type) {
+      case 'notification':
+        return navigate('NotificationScreen');
+  
+      case 'profile':
+        return navigate('NotificationScreen');
+  
+      default:
+        return;
+    }
+  };
+
   const onCloseSheet = () => {
-      customSheetRef?.current?.closeSheet()
-  }
+    customSheetRef?.current?.closeSheet();
+  };
   return (
     <View style={styles.headerContainer}>
-      <View style={{flexDirection: "row", alignItems: 'center'}}>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <View style={{flex: 6}}>
           <Text preset="heading">EXPLORE</Text>
         </View>
-        <Pressable onPress={handlePresentModalPress} style={{flex: 1, alignItems: 'flex-end'}}>
-        <Feather
-              name="plus"
+        {currentScreenName === 'DeletedList' ? (
+          <Pressable
+            onPress={()=> {handleNavigation('notification')}}
+            style={{flex: 1, alignItems: 'flex-end'}}>
+            <Ionicons
+              name="notifications-outline"
               size={30}
-              color={colors.darkGray }
+              color={colors.darkGray}
             />
-        </Pressable>
+          </Pressable>
+        ) : (
+          <View style={{flex: 2}}>
+            <View style={{flexDirection: 'row',}}>
+            
+            <Pressable
+              onPress={handlePresentModalPress}
+              style={{flex: 1, alignItems: 'flex-end', marginRight: 1}}>
+              <Feather name="plus" size={30} color={colors.darkGray} />
+            </Pressable>
+            <Pressable
+              onPress={()=> {handleNavigation('profile')}}
+              style={{flex: 1, alignItems: 'flex-end', }}>
+              <Ionicons
+              name="person-circle-outline"
+              size={30}
+              color={colors.darkGray}
+            />
+            </Pressable>
+            </View>
+          </View>
+        )}
       </View>
-      <CustomBottomSheet
-                title="Create New Collection"
-                ref={customSheetRef}
-            >
-                <View>
-                  {/* <Text>Hi</Text> */}
-                </View>
-            </CustomBottomSheet>
+      <CustomBottomSheet ref={customSheetRef}>
+        <AddBrand onCloseSheet={onCloseSheet} />
+      </CustomBottomSheet>
 
       {/* <View style={styles.headerBox}>
         <View style={styles.backArrow}>
@@ -66,7 +112,7 @@ const CustomHeader = ({ title = "",  headerTransparent = false  }) => {
         </View>
       </View> */}
     </View>
-  )
+  );
 };
 
 export default CustomHeader;
@@ -75,7 +121,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     paddingHorizontal: 20,
     paddingVertical: 16,
-    backgroundColor: colors.white
+    backgroundColor: colors.white,
     // height: wWidth * 0.25,
   },
   // headerContainerAndroid: {
