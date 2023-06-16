@@ -6,11 +6,12 @@ import React, {
   useRef,
   useImperativeHandle,
 } from 'react';
-import {View, BackHandler} from 'react-native';
+import {View, BackHandler, KeyboardAvoidingView, Platform} from 'react-native';
 // import { Text } from "@ui-kitten/components";
 import {BottomSheetModal, BottomSheetBackdrop} from '@gorhom/bottom-sheet';
 import Text from '../text/Text';
 import {metrics} from 'theme/metrics';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // import tw from "tailwind";
 
 type SnapPoint = `${number}%`;
@@ -100,10 +101,17 @@ const CustomBottomSheet = React.forwardRef<
         ref={bottomSheetRef}
         index={0}
         snapPoints={snapPoints}
-        onChange={handleSheetChanges}
-        enablePanDownToClose={true}
+        // onChange={handleSheetChanges}
+        // enablePanDownToClose={true}
         backdropComponent={renderBackdrop}>
-        <View
+          <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{ flex: 1 }}
+      >
+        <KeyboardAwareScrollView
+          // ...other props for KeyboardAwareScrollView
+        >
+          <View
           style={{
             marginTop: metrics.spacing.s,
           }}>
@@ -112,6 +120,10 @@ const CustomBottomSheet = React.forwardRef<
             {children}
           </View>
         </View>
+          {/* Your content here */}
+        </KeyboardAwareScrollView>
+      </KeyboardAvoidingView>
+        
       </BottomSheetModal>
     </>
   );

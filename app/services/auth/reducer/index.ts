@@ -11,6 +11,19 @@ const reducer = (state: AuthContextProps, action:any) => {
       }
       return state;
 
+    case 'SET_BRAND':
+      return {
+        ...state,
+        data: {
+          imageLink: action.imageLink,
+          collectionName: action.collectionName,
+          description: action.description,
+          isFollowed: false,
+          isDeleted: false
+        },
+      };
+
+
     case 'SET_SETTINGS':
       return {
         ...state,

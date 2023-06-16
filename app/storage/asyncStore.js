@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const key = 'authUser';
 const lngKey = 'lngKey';
+const brandKey = 'brandKey';
 
 const storeData = async value => {
   try {
@@ -11,7 +12,23 @@ const storeData = async value => {
     alert(e);
   }
 };
+const storeBrand = async value => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(brandKey, jsonValue);
+  } catch (e) {
+    alert(e);
+  }
+};
 
+const getBrand = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem(brandKey);
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    alert(e);
+  }
+};
 const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem(key);
@@ -47,4 +64,4 @@ const getLng = async () => {
   }
 };
 
-export {storeData, storeLng, getData, getLng, removeData};
+export {storeData, storeLng, getData, getLng, removeData, storeBrand, getBrand};

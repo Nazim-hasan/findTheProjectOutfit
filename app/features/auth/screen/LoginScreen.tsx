@@ -22,7 +22,7 @@ import Button from 'components/common/button/Button';
 import Divider from 'components/common/divider/Divider';
 import facebookSVG from 'assets/images/svg/facebookSVG';
 import googleSVG from 'assets/images/svg/googleSVG';
-import {storeData} from 'storage/asyncStore';
+
 import {KeyboardAvoidingView} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -56,6 +56,7 @@ const LoginScreen = () => {
     control,
     handleSubmit,
     reset,
+    
     formState: {errors, isSubmitting, isSubmitSuccessful},
   } = useForm({
     resolver: yupResolver(

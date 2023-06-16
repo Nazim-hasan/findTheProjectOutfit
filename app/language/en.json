@@ -14,5 +14,13 @@
       "emailHolder": "Email Address",
       "passHolder": "Password"
     }
+  },
+  "addBrand": {
+    "addBrandForm" : {
+      "imageHolder": "Image Link",
+      "collectionHolder": "Collection Name",
+      "desHolder": "Description"
+
+    }
   }
 }
