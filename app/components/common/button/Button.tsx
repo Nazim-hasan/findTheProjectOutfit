@@ -8,15 +8,16 @@ interface ButtonProps {
   title: string;
   onPress: () => void;
   customStyles?: StyleProp<ViewStyle>;
+  inactiveText?: boolean;
   smallTitle?: boolean,
   icon?: JSX.Element;
 }
 
-const Button: React.FC<ButtonProps> = ({ title, onPress, customStyles, smallTitle, icon }) => {
+const Button: React.FC<ButtonProps> = ({ title, onPress, customStyles, smallTitle, icon, inactiveText }) => {
   return (
     <TouchableOpacity style={[styles.button, customStyles, icon && {flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}]} onPress={onPress}>
       { icon && icon}
-      <Text preset= {smallTitle ? 'MediumSm' : "SemiBoldLg"}  customStyles={styles.btnText}>{title}</Text>
+      <Text preset= {smallTitle ? 'MediumSm' : "SemiBoldLg"}  customStyles={inactiveText ? {color: colors.primary} :styles.btnText}>{title}</Text>
     </TouchableOpacity>
   );
 };

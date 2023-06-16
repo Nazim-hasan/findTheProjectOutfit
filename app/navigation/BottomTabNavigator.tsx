@@ -25,7 +25,7 @@ export default function BottomTabNavigator() {
   const [{appSettings}] = useStateValue();
   return (
     <Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="List"
       screenOptions={{
         tabBarActiveTintColor: colors.darkGray,
         tabBarLabelStyle: {
@@ -34,8 +34,9 @@ export default function BottomTabNavigator() {
         },
       }}>
       <Screen
-        name="HomeScreen"
+        name="List"
         component={HomeScreen}
+        
         options={{
           header: props => (
             <CustomHeader
@@ -53,7 +54,7 @@ export default function BottomTabNavigator() {
         }}
       />
       <Screen
-        name="DeletedList"
+        name="Deleted List"
         component={DeletedList}
         options={{
           header: props => (

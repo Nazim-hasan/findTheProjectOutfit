@@ -8,15 +8,20 @@ import { metrics } from 'theme/metrics';
 import { getBrand } from 'storage/asyncStore';
 import filterBrand from 'utils/filterBrand';
 import Brand from 'models/brand';
+import { __ } from 'language/stringPicker';
+import { useStateValue } from 'services/auth/hooks';
+import Button from 'components/common/button/Button';
 
 const HomeScreen = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
+  const [{appSettings, refresh}] = useStateValue();
+
+  useEffect
   useEffect(()=> {
     getItem();
-  },[])
+  },[refresh])
   const getItem = async  ()=> {
     const value = await getBrand()
-    console.log('all brands from home',value)
     if(value){
       setBrands(filterBrand(value, false))
     }
@@ -25,7 +30,10 @@ const HomeScreen = () => {
     <Container>
       <CustomSearchBox />
       <View style={styles.brandListContainer}>
-        <Text preset="body">Top street-style brands</Text>
+      <Text >{__(
+            'homeScreen.title',
+            appSettings.lng,
+          )}</Text>
         <BrandList data={brands}/>
       </View>
     </Container>

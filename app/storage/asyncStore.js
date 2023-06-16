@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useStateValue } from 'services/auth/hooks';
 
 const key = 'authUser';
 const lngKey = 'lngKey';
@@ -12,11 +13,16 @@ const storeData = async value => {
     alert(e);
   }
 };
+// const [{refresh}, dispatch] = useStateValue();
 const storeBrand = async value => {
   try {
     const jsonValue = JSON.stringify(value);
-    console.log('setting', jsonValue)
     await AsyncStorage.setItem(brandKey, jsonValue);
+    // dispatch({
+    //   type: "SET_REFRESH",
+    //   refresh: !refresh
+    // })
+    console.log('updating')
   } catch (e) {
     alert(e);
   }

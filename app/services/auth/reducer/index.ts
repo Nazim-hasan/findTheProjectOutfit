@@ -10,6 +10,12 @@ const reducer = (state: AuthContextProps, action:any) => {
         };
       }
       return state;
+    
+    case 'SET_REFRESH': 
+    return {
+      ...state,
+      refresh: action.refresh, 
+    };
 
     case 'SET_BRAND':
       return {

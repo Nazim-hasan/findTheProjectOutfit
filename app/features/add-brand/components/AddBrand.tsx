@@ -21,7 +21,7 @@ interface AddBrandProps {
 }
 
 const AddBrand = ({onCloseSheet}: AddBrandProps) => {
-  const [{appSettings}] = useStateValue();
+  const [{appSettings, refresh}, dispatch] = useStateValue();
 
   //handling form
   const {
@@ -74,6 +74,10 @@ const AddBrand = ({onCloseSheet}: AddBrandProps) => {
       }
       medicineArray.push(value);
       storeBrand(medicineArray);
+      dispatch({
+        type: "SET_REFRESH",
+        refresh: !refresh
+      })
       showMessage({
         message: 'Brand Added',
         type: 'success',

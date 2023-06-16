@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, KeyboardAvoidingView } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from 'theme/colors';
 import Input from '../input/Input';
@@ -12,7 +12,7 @@ const searchIcon = (
 const CustomSearchBox = () => {
   const [title, setTitle] = useState('');
   return (
-    <View
+    <KeyboardAvoidingView 
         style={{
           flex: 1,
           backgroundColor: colors.white,
@@ -28,7 +28,7 @@ const CustomSearchBox = () => {
             borderRadius: metrics.spacing.s,
           }}
         />
-      </View>
+      </KeyboardAvoidingView>
   )
 }
 

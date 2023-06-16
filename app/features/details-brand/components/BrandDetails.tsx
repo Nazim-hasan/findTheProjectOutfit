@@ -17,15 +17,15 @@ import getRandomNumber from 'utils/randomNumber';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Brand from 'models/brand';
+import { deleteBrand } from 'utils/updateBrandInfo';
 
 interface AddBrandProps {
   onCloseSheet: () => void;
-  brand: Brand
+  brand: Brand;
 }
 
 const BrandDetails = ({onCloseSheet, brand}: AddBrandProps) => {
-  console.log('single brand', brand)
-  const [{appSettings}] = useStateValue();
+  const [{appSettings, refresh}, dispatch] = useStateValue();
 
   //handling form
   const {
@@ -62,35 +62,47 @@ const BrandDetails = ({onCloseSheet, brand}: AddBrandProps) => {
         isFollowed: false,
         isDeleted: false,
       };
-
-      storeBrandStorage(finalData);
     } catch (e) {
       console.log(e);
     }
   };
-
-  const storeBrandStorage = async (value: any) => {
-    let medicineArray = [];
-    try {
-      let storedMedicine = await getBrand();
-      if (storedMedicine !== null) {
-        medicineArray = storedMedicine; // you could do some additional checks to make sure it is an array
-      }
-      medicineArray.push(value);
-      storeBrand(medicineArray);
-      showMessage({
-        message: 'Brand Added',
-        type: 'success',
-      });
-      reset();
-      onCloseSheet();
-    } catch (error) {
-      // Error saving data
-      console.log(error);
-    }
+  const getPreviousBrands = async (): Promise<Brand[]> => {
+    return await getBrand();
   };
-  const editIcon = <FontAwesome name="edit" size={15} color={colors.white} style={{marginRight: metrics.spacing.s}}/>;
-  const deleteIcon = <Feather name="trash-2" size={20} color={colors.white} style={{marginRight: metrics.spacing.s}}/>;
+
+  const handleDelete = async () => {
+    const allBrands = await getPreviousBrands();
+    storeBrand(deleteBrand(allBrands, brand.id, true));
+    dispatch({
+      type: "SET_REFRESH",
+      refresh: !refresh
+    })
+    showMessage({
+      message: 'Brand Deleted',
+      type: 'warning',
+    });
+    reset();
+    onCloseSheet();
+  };
+
+ 
+
+  const editIcon = (
+    <FontAwesome
+      name="edit"
+      size={15}
+      color={colors.white}
+      style={{marginRight: metrics.spacing.s}}
+    />
+  );
+  const deleteIcon = (
+    <Feather
+      name="trash-2"
+      size={20}
+      color={colors.white}
+      style={{marginRight: metrics.spacing.s}}
+    />
+  );
 
   return (
     <View>
@@ -208,30 +220,31 @@ const BrandDetails = ({onCloseSheet, brand}: AddBrandProps) => {
 
           {isSubmitting ? (
             <ActivityIndicator />
-          ) : (
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          ) : !brand.isDeleted && (
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Button
-              onPress={handleSubmit(onSubmit)}
-              title={__('detailsBrand.detailsForm.submit', appSettings.lng)}
-              icon={editIcon}
-              smallTitle
-              customStyles={{
-                paddingHorizontal: metrics.spacing.sm,
-                paddingVertical: metrics.spacing.s,
-                backgroundColor: colors.black,
-              }}
-            />
+                onPress={handleSubmit(onSubmit)}
+                title={__('detailsBrand.detailsForm.submit', appSettings.lng)}
+                icon={editIcon}
+                smallTitle
+                customStyles={{
+                  paddingHorizontal: metrics.spacing.sm,
+                  paddingVertical: metrics.spacing.s,
+                  backgroundColor: colors.black,
+                }}
+              />
               <Button
-              onPress={handleSubmit(onSubmit)}
-              title={__('detailsBrand.delete', appSettings.lng)}
-              icon={deleteIcon}
-              smallTitle
-              customStyles={{
-                paddingHorizontal: metrics.spacing.sm,
-                paddingVertical: metrics.spacing.s,
-                backgroundColor: colors.red,
-              }}
-            />
+                onPress={handleDelete}
+                title={__('detailsBrand.delete', appSettings.lng)}
+                icon={deleteIcon}
+                smallTitle
+                customStyles={{
+                  paddingHorizontal: metrics.spacing.sm,
+                  paddingVertical: metrics.spacing.s,
+                  backgroundColor: colors.red,
+                }}
+              />
             </View>
           )}
         </View>

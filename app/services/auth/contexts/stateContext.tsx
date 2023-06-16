@@ -18,6 +18,7 @@ export const defaultState = {
   appSettings: {
     lng: 'en',
   },
+  refresh: false
 }
 
 export const StateContext = createContext<any>(null);

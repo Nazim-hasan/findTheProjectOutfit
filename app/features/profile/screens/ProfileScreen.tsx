@@ -7,10 +7,12 @@ import personSVG from 'assets/images/svg/personSVG';
 import Text from 'components/common/text/Text';
 import {metrics} from 'theme/metrics';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useAuthFunction} from 'services/auth/hooks';
+import {useAuthFunction, useStateValue} from 'services/auth/hooks';
+import {__} from 'language/stringPicker';
 
 const ProfileScreen = () => {
   const {handleLogout} = useAuthFunction();
+  const [{appSettings}] = useStateValue();
   return (
     <Container
       customStyles={{
@@ -30,7 +32,7 @@ const ProfileScreen = () => {
           <Text
             preset="SemiBoldBody"
             customStyles={{marginTop: metrics.spacing.sm}}>
-            Bruce Wayne
+            {__('profileScreen.name', appSettings.lng)}
           </Text>
           <View
             style={{
@@ -46,35 +48,40 @@ const ProfileScreen = () => {
                 color: colors.gray,
                 textTransform: 'uppercase',
               }}>
-              User
+              {__('profileScreen.role', appSettings.lng)}
             </Text>
           </View>
         </View>
       </View>
       <View style={{flex: 1, flexDirection: 'row'}}>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text preset="SemiBoldBody">48</Text>
+          <Text preset="SemiBoldBody">
+            {__('profileScreen.followerCount', appSettings.lng)}
+          </Text>
           <Text preset="MediumSm" customStyles={styles.textLabel}>
-            Followers
+            {__('profileScreen.followers', appSettings.lng)}
           </Text>
         </View>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text preset="SemiBoldBody">572</Text>
+          <Text preset="SemiBoldBody">
+            {__('profileScreen.followingCount', appSettings.lng)}
+          </Text>
           <Text preset="MediumSm" customStyles={styles.textLabel}>
-            Following
+            {__('profileScreen.following', appSettings.lng)}
           </Text>
         </View>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text preset="SemiBoldBody">35</Text>
+          <Text preset="SemiBoldBody">
+            {__('profileScreen.savesCount', appSettings.lng)}
+          </Text>
           <Text preset="MediumSm" customStyles={styles.textLabel}>
-            Saves
+            {__('profileScreen.saves', appSettings.lng)}
           </Text>
         </View>
       </View>
       <View style={{flex: 6, alignItems: 'center'}}>
         <Text preset="MediumSm" customStyles={styles.textLabel} centered>
-          Lorem ipsum dolor sit amet, consectetur elit. In augue semper arcu
-          enim viverra sit ipsum. Lorem ipsum dolor sit amet consectetur elit.
+          {__('profileScreen.post', appSettings.lng)}
         </Text>
         <Pressable
           onPress={handleLogout}
@@ -96,7 +103,7 @@ const ProfileScreen = () => {
                 color: colors.gray,
                 marginLeft: metrics.spacing.s,
               }}>
-              Logout
+              {__('profileScreen.logout', appSettings.lng)}
             </Text>
           </View>
         </Pressable>

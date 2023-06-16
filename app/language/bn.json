@@ -1,5 +1,61 @@
 {
   "routeNames": {
-    "homeNav": "হোম"
+    "homeNav": "Home",
+    "loginScr": "loginScr",
+    "deletedList": "Deleted List",
+    "notificationScr": "Notification",
+    "profileScr": ""
+  },
+  "loginScreen": {
+    "welcome": "Welcome back!",
+    "forgetPass": "Forget Password?",
+    "loginAlterCaption": "Or, Log in with",
+    "loginForm": {
+      "emailHolder": "Email Address",
+      "passHolder": "Password",
+      "submitTitle": "Log In"
+    }
+  },
+  "homeScreen": {
+    "title": "Top street-style brands"
+  },
+  "profileScreen": {
+    "name": "Bruce Wayne",
+    "role": "User",
+    "followerCount": "48",
+    "followers": "Followers",
+    "followingCount": "572",
+    "following": "Following",
+    "savesCount": "35",
+    "saves": "Saves",
+    "post": "Hello, I'm Bruce Wayne, but you might know me better as Batman. As a billionaire philanthropist and CEO of Wayne Enterprises.",
+    "logout": "Logout"
+  },
+  "notificationScr": {
+    "content": "By night, I don the iconic cape and cowl, using my vast resources, intelligence, and physical prowess to strike fear into the hearts of criminals. "
+  },
+  "brandCard": {
+    "follow": "K Followers",
+    "followBtnInactive": "Follow",
+    "followBtnActive": "Following"
+  },
+  "addBrand": {
+    "caption": "Create New Collection",
+    "addBrandForm": {
+      "imageHolder": "Image Link",
+      "collectionHolder": "Collection Name",
+      "desHolder": "Description",
+      "submit": "Create New"
+    }
+  },
+  "detailsBrand": {
+    "caption": "Details",
+    "detailsForm": {
+      "imageHolder": "Image Link",
+      "collectionHolder": "Collection Name",
+      "desHolder": "Description",
+      "submit": "Edit"
+    },
+    "delete": "Remove"
   }
 }

@@ -1,20 +1,35 @@
 import {StyleSheet, Image, View, Pressable} from 'react-native';
-import React, { useCallback, useRef } from 'react';
+import React, {useCallback, useRef} from 'react';
 import {metrics} from 'theme/metrics';
 import {colors} from 'theme/colors';
 import Text from 'components/common/text/Text';
 import Button from 'components/common/button/Button';
-import CustomBottomSheet, { BottomSheetForwardRefType } from 'components/common/custom-bottom-sheet/CustomBottomSheet';
-import AddBrand from 'features/add-brand/components/AddBrand';
+import CustomBottomSheet, {
+  BottomSheetForwardRefType,
+} from 'components/common/custom-bottom-sheet/CustomBottomSheet';
 import BrandDetails from 'features/details-brand/components/BrandDetails';
+import {__} from 'language/stringPicker';
+import {useStateValue} from 'services/auth/hooks';
+import {toggleFollowBrand} from 'utils/updateBrandInfo';
+import {getBrand, storeBrand} from 'storage/asyncStore';
 
 const BrandCard = ({item}) => {
+  const [{appSettings, refresh}, dispatch] = useStateValue();
   const customSheetRef = useRef<BottomSheetForwardRefType>(null);
   const handlePresentModalPress = useCallback(() => {
     customSheetRef?.current?.activateSheet();
   }, []);
   const onCloseSheet = () => {
     customSheetRef?.current?.closeSheet();
+  };
+
+  const handleToggleFollow = async () => {
+    const brands = await getBrand();
+    storeBrand(toggleFollowBrand(brands, item.id));
+    dispatch({
+      type: "SET_REFRESH",
+      refresh: !refresh
+    })
   };
 
   return (
@@ -27,7 +42,8 @@ const BrandCard = ({item}) => {
       <View style={styles.infoContainer}>
         <Text preset="SemiBoldLg">{item?.collectionName}</Text>
         <Text preset="MediumSm" customStyles={{color: colors.gray}}>
-          {item.follower}K Followers
+          {item.follower}
+          {__('brandCard.follow', appSettings.lng)}
         </Text>
       </View>
       <View style={{marginTop: metrics.spacing.m}}>
@@ -35,13 +51,21 @@ const BrandCard = ({item}) => {
           customStyles={{
             paddingHorizontal: metrics.spacing.l,
             paddingVertical: metrics.spacing.xs,
+            backgroundColor: !item.isFollowed
+              ? colors.primary
+              : colors.secondary,
           }}
-          title="Follow"
-          onPress={() => {}}
+          inactiveText={item.isFollowed}
+          title={
+            item.isFollowed
+              ? __('brandCard.followBtnActive', appSettings.lng)
+              : __('brandCard.followBtnInactive', appSettings.lng)
+          }
+          onPress={handleToggleFollow}
         />
       </View>
       <CustomBottomSheet ref={customSheetRef}>
-        <BrandDetails onCloseSheet={onCloseSheet} brand={item}/>
+        <BrandDetails onCloseSheet={onCloseSheet} brand={item} />
       </CustomBottomSheet>
     </Pressable>
   );

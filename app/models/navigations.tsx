@@ -26,7 +26,7 @@ export type RootDrawerParamList = {
 };
 
 export type RootTabParamList = {
-  HomeScreen: undefined,
+  List: undefined,
   DeletedList: undefined,
   PolicyScreen: undefined,
   ClaimsScreen: undefined,

@@ -4,4 +4,5 @@ export default interface Brand {
   imageLink: string;
   isDeleted: boolean;
   isFollowed: boolean;
+  id: number
 }

@@ -1,33 +1,32 @@
-import React from 'react'
-import { useStateValue } from './useStateValue';
-import { removeBrands, removeData, storeData } from '../../../storage/asyncStore';
-import { showMessage } from "react-native-flash-message";
+import React from 'react';
+import {useStateValue} from './useStateValue';
+import {removeBrands, removeData, storeData} from '../../../storage/asyncStore';
+import {showMessage} from 'react-native-flash-message';
 
 const useAuthFunction = () => {
-    const [{ user, token, appSettings }, dispatch] = useStateValue();
+  const [{user, token, appSettings}, dispatch] = useStateValue();
 
-    const handleLogin = (value: string) => {
-        dispatch({
-            type: 'SET_USER',
-            user: true
-        });
-        storeData(value)
-    }
+  const handleLogin = (value: string) => {
+    dispatch({
+      type: 'SET_USER',
+      user: true,
+    });
+    storeData(value);
+  };
 
-    const handleLogout = () => {
-        dispatch({
-            type: 'SET_USER',
-            user: false
-        });
-        removeData();
-        removeBrands();
-        showMessage({
-            message: "Logout",
-            type: "danger",
-          });
-    };
+  const handleLogout = () => {
+    dispatch({
+      type: 'SET_USER',
+      user: false,
+    });
+    removeData();
+    showMessage({
+      message: 'Logout',
+      type: 'danger',
+    });
+  };
 
-    return { handleLogout, handleLogin }
-}
+  return {handleLogout, handleLogin};
+};
 
-export default useAuthFunction
+export default useAuthFunction;

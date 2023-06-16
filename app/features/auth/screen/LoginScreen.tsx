@@ -166,7 +166,10 @@ const LoginScreen = () => {
             {isSubmitting ? (
               <ActivityIndicator />
             ) : (
-              <Button onPress={handleSubmit(onSubmit)} title="Log In" />
+              <Button onPress={handleSubmit(onSubmit)} title={__(
+                'loginScreen.loginForm.submitTitle',
+                appSettings.lng,
+              )}/>
             )}
           </KeyboardAvoidingView>
           <View style={{marginVertical: metrics.spacing.l}}>

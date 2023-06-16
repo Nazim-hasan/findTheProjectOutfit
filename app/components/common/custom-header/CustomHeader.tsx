@@ -49,7 +49,7 @@ const CustomHeader = ({title = '', headerTransparent = false}) => {
         <View style={{flex: 6}}>
           <Text preset="heading">EXPLORE</Text>
         </View>
-        {currentScreenName === 'DeletedList' ? (
+        {currentScreenName === 'Deleted List' ? (
           <Pressable
             onPress={()=> {handleNavigation('notification')}}
             style={{flex: 1, alignItems: 'flex-end'}}>
@@ -84,6 +84,8 @@ const CustomHeader = ({title = '', headerTransparent = false}) => {
       <CustomBottomSheet ref={customSheetRef}>
         <AddBrand onCloseSheet={onCloseSheet} />
       </CustomBottomSheet>
+
+      
 
       {/* <View style={styles.headerBox}>
         <View style={styles.backArrow}>
