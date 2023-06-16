@@ -1,18 +1,28 @@
-import {StyleSheet, Image, View} from 'react-native';
-import React from 'react';
+import {StyleSheet, Image, View, Pressable} from 'react-native';
+import React, { useCallback, useRef } from 'react';
 import {metrics} from 'theme/metrics';
 import {colors} from 'theme/colors';
 import Text from 'components/common/text/Text';
 import Button from 'components/common/button/Button';
+import CustomBottomSheet, { BottomSheetForwardRefType } from 'components/common/custom-bottom-sheet/CustomBottomSheet';
+import AddBrand from 'features/add-brand/components/AddBrand';
+import BrandDetails from 'features/details-brand/components/BrandDetails';
 
 const BrandCard = ({item}) => {
+  const customSheetRef = useRef<BottomSheetForwardRefType>(null);
+  const handlePresentModalPress = useCallback(() => {
+    customSheetRef?.current?.activateSheet();
+  }, []);
+  const onCloseSheet = () => {
+    customSheetRef?.current?.closeSheet();
+  };
+
   return (
-    <View style={styles.cardContainer}>
+    <Pressable onPress={handlePresentModalPress} style={styles.cardContainer}>
       <View style={styles.imageContainer}>
-        {
-          item?.image && <Image source={item?.image} />
-        }
-        
+        {item?.imageLink && (
+          <Image source={{uri: item?.imageLink}} style={styles.imageFrame} />
+        )}
       </View>
       <View style={styles.infoContainer}>
         <Text preset="SemiBoldLg">{item?.collectionName}</Text>
@@ -30,7 +40,10 @@ const BrandCard = ({item}) => {
           onPress={() => {}}
         />
       </View>
-    </View>
+      <CustomBottomSheet ref={customSheetRef}>
+        <BrandDetails onCloseSheet={onCloseSheet} brand={item}/>
+      </CustomBottomSheet>
+    </Pressable>
   );
 };
 
@@ -55,5 +68,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  imageFrame: {
+    height: 95,
+    width: 95,
+    borderRadius: 95 / 2,
   },
 });

@@ -1,25 +1,31 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Container} from 'layout';
-import {colors} from 'theme/colors';
-import Input from 'components/common/input/Input';
 import {metrics} from 'theme/metrics';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Text from 'components/common/text/Text';
 import BrandList from 'features/brand/components/BrandList';
 import CustomSearchBox from 'components/common/custom-search-box/CustomSearchBox';
+import { getBrand } from 'storage/asyncStore';
+import filterBrand from 'utils/filterBrand';
+import Brand from 'models/brand';
 const DeletedList = () => {
-  const [title, setTitle] = useState('');
-  const searchIcon = (
-    <FontAwesome5 name="search" size={20} color={colors.gray} />
-  );
-
+  const [brands, setBrands] = useState<Brand[]>([]);
+  useEffect(()=> {
+    getItem();
+  },[])
+  const getItem = async  ()=> {
+    const value = await getBrand()
+    if(value){
+      setBrands(filterBrand(value, true))
+      console.log('filterBrand(value, false)', filterBrand(value, true))
+    }
+  }
   return (
     <Container>
       <CustomSearchBox />
       <View style={styles.brandListContainer}>
         <Text preset="body">Top street-style brands</Text>
-        <BrandList />
+        <BrandList data={brands}/>
       </View>
     </Container>
   );

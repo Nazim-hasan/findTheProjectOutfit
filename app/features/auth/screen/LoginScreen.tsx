@@ -27,14 +27,12 @@ import {KeyboardAvoidingView} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { showMessage, hideMessage } from "react-native-flash-message";
-
+import {showMessage} from 'react-native-flash-message';
 
 const height = Dimensions.get('window').height;
 
 const LoginScreen = () => {
   const [{appSettings}] = useStateValue();
-  const [title, setTitle] = useState('');
   const envelopeIcon = (
     <FontAwesome name="envelope" size={20} color={colors.gray} />
   );
@@ -43,21 +41,18 @@ const LoginScreen = () => {
   const eyeCloseIcon = (
     <Ionicons name="ios-eye-off" size={20} color={colors.gray} />
   );
-  const [{user}, dispatch] = useStateValue();
-
   //UI state
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const {handleLogin} = useAuthFunction();
-
 
   //handling form
   const {
     control,
     handleSubmit,
     reset,
-    
-    formState: {errors, isSubmitting, isSubmitSuccessful},
+
+    formState: {errors, isSubmitting},
   } = useForm({
     resolver: yupResolver(
       yup.object().shape({
@@ -74,8 +69,8 @@ const LoginScreen = () => {
     const {email, password} = data;
     try {
       showMessage({
-        message: "Login Success",
-        type: "success",
+        message: 'Login Success',
+        type: 'success',
       });
       handleLogin(email);
       reset();
@@ -159,9 +154,7 @@ const LoginScreen = () => {
                       secureTextEntry={showPassword}
                     />
                     {errors.password && (
-                      <Text
-                        preset="MediumSm"
-                        customStyles={styles.warningText}>
+                      <Text preset="MediumSm" customStyles={styles.warningText}>
                         {errors.password.message}
                       </Text>
                     )}
@@ -193,20 +186,16 @@ const LoginScreen = () => {
           </View>
         </View>
         <View style={styles.bottomContainer}>
-          <View
-            style={styles.alterLoginCaptionContainer}>
+          <View style={styles.alterLoginCaptionContainer}>
             <Divider customStyle={{width: 80}} />
             <Text>{__('loginScreen.loginAlterCaption', appSettings.lng)}</Text>
             <Divider customStyle={{width: 80}} />
           </View>
-          <View
-            style={styles.alterLoginContainer}>
-            <TouchableOpacity
-              style={styles.socialButton}>
+          <View style={styles.alterLoginContainer}>
+            <TouchableOpacity style={styles.socialButton}>
               <SvgLoader size={23} component={googleSVG} />
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.socialButton}>
+            <TouchableOpacity style={styles.socialButton}>
               <SvgLoader size={30} component={facebookSVG} />
             </TouchableOpacity>
           </View>
@@ -257,5 +246,5 @@ const styles = StyleSheet.create({
     paddingVertical: metrics.spacing.s,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });

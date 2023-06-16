@@ -14,13 +14,17 @@ import {useStateValue} from 'services/auth/hooks';
 import {colors} from 'theme/colors';
 import {getBrand, storeBrand} from 'storage/asyncStore';
 import getRandomNumber from 'utils/randomNumber';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import Brand from 'models/brand';
 
 interface AddBrandProps {
   onCloseSheet: () => void;
+  brand: Brand
 }
 
-const AddBrand = ({onCloseSheet}: AddBrandProps) => {
+const BrandDetails = ({onCloseSheet, brand}: AddBrandProps) => {
+  console.log('single brand', brand)
   const [{appSettings}] = useStateValue();
 
   //handling form
@@ -85,14 +89,15 @@ const AddBrand = ({onCloseSheet}: AddBrandProps) => {
       console.log(error);
     }
   };
-  const plusIcon = <Feather name="plus" size={15} color={colors.white} />;
+  const editIcon = <FontAwesome name="edit" size={15} color={colors.white} style={{marginRight: metrics.spacing.s}}/>;
+  const deleteIcon = <Feather name="trash-2" size={20} color={colors.white} style={{marginRight: metrics.spacing.s}}/>;
 
   return (
     <View>
       <CustomBackButton isBottomSheet onCloseSheet={onCloseSheet} />
       <View style={styles.container}>
         <Text preset="SemiBoldLg">
-          {__('addBrand.caption', appSettings.lng)}
+          {__('detailsBrand.caption', appSettings.lng)}
         </Text>
         <View style={styles.formContainer}>
           <Controller
@@ -104,9 +109,10 @@ const AddBrand = ({onCloseSheet}: AddBrandProps) => {
                 <>
                   <Input
                     placeholder={__(
-                      'addBrand.addBrandForm.imageHolder',
+                      'detailsBrand.detailsForm.imageHolder',
                       appSettings.lng,
                     )}
+                    defaultValue={brand.imageLink}
                     onChangeText={onChange}
                     customStyles={{
                       borderRadius: metrics.spacing.sm,
@@ -138,9 +144,10 @@ const AddBrand = ({onCloseSheet}: AddBrandProps) => {
                 <>
                   <Input
                     placeholder={__(
-                      'addBrand.addBrandForm.collectionHolder',
+                      'detailsBrand.detailsForm.collectionHolder',
                       appSettings.lng,
                     )}
+                    defaultValue={brand.collectionName}
                     onChangeText={onChange}
                     customStyles={{
                       borderRadius: metrics.spacing.sm,
@@ -172,9 +179,10 @@ const AddBrand = ({onCloseSheet}: AddBrandProps) => {
                 <>
                   <Input
                     placeholder={__(
-                      'addBrand.addBrandForm.desHolder',
+                      'detailsBrand.detailsForm.desHolder',
                       appSettings.lng,
                     )}
+                    defaultValue={brand.description}
                     multiline
                     onChangeText={onChange}
                     customStyles={{
@@ -201,17 +209,30 @@ const AddBrand = ({onCloseSheet}: AddBrandProps) => {
           {isSubmitting ? (
             <ActivityIndicator />
           ) : (
-            <Button
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <Button
               onPress={handleSubmit(onSubmit)}
-              title={__('addBrand.addBrandForm.submit', appSettings.lng)}
-              icon={plusIcon}
+              title={__('detailsBrand.detailsForm.submit', appSettings.lng)}
+              icon={editIcon}
               smallTitle
               customStyles={{
-                paddingHorizontal: metrics.spacing.l,
-                paddingVertical: metrics.spacing.sm,
+                paddingHorizontal: metrics.spacing.sm,
+                paddingVertical: metrics.spacing.s,
                 backgroundColor: colors.black,
               }}
             />
+              <Button
+              onPress={handleSubmit(onSubmit)}
+              title={__('detailsBrand.delete', appSettings.lng)}
+              icon={deleteIcon}
+              smallTitle
+              customStyles={{
+                paddingHorizontal: metrics.spacing.sm,
+                paddingVertical: metrics.spacing.s,
+                backgroundColor: colors.red,
+              }}
+            />
+            </View>
           )}
         </View>
       </View>
@@ -219,7 +240,7 @@ const AddBrand = ({onCloseSheet}: AddBrandProps) => {
   );
 };
 
-export default AddBrand;
+export default BrandDetails;
 
 const styles = StyleSheet.create({
   container: {

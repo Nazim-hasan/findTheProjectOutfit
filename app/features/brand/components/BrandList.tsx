@@ -1,12 +1,17 @@
-import {StyleSheet, FlatList, View} from 'react-native';
+import {StyleSheet, FlatList, View, Dimensions} from 'react-native';
 import React, {useCallback} from 'react';
-import {defaultBrands} from 'features/deleted-list/data/brand.data';
 import Text from 'components/common/text/Text';
 import BrandCard from './BrandCard';
 import {metrics} from 'theme/metrics';
 import {colors} from 'theme/colors';
+import Brand from 'models/brand';
+import SvgLoader from 'components/common/SvgLoader';
+import emptySVG from 'assets/images/svg/emptySVG';
 const NUM_COLUM = 2;
-const BrandList = ({data}) => {
+
+const height = Dimensions.get('window').height;
+
+const BrandList: React.FC<{data: Brand[]}> = ({data}) => {
   const renderItem = useCallback(
     ({item}) =>
       item.empty ? (
@@ -17,7 +22,14 @@ const BrandList = ({data}) => {
     [],
   );
   const ListEmptyComponent = () => {
-    return <Text>I am empty</Text>;
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <SvgLoader component={emptySVG} size={100} />
+        <Text preset="MediumSm" customStyles={{color: colors.gray}}>
+          No brand to show
+        </Text>
+      </View>
+    );
   };
   const ItemSeparatorComponent = useCallback(
     () => <View style={{marginVertical: metrics.spacing.xs}} />,
