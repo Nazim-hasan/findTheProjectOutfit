@@ -15,6 +15,7 @@ const storeData = async value => {
 const storeBrand = async value => {
   try {
     const jsonValue = JSON.stringify(value);
+    console.log('setting', jsonValue)
     await AsyncStorage.setItem(brandKey, jsonValue);
   } catch (e) {
     alert(e);
@@ -45,6 +46,13 @@ const removeData = async () => {
     alert(e);
   }
 };
+const removeBrands = async () => {
+  try {
+    await AsyncStorage.removeItem(brandKey);
+  } catch (e) {
+    alert(e);
+  }
+};
 
 const storeLng = async value => {
   try {
@@ -64,4 +72,4 @@ const getLng = async () => {
   }
 };
 
-export {storeData, storeLng, getData, getLng, removeData, storeBrand, getBrand};
+export {storeData, storeLng, getData, getLng, removeData, storeBrand, getBrand, removeBrands};

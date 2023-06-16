@@ -9,23 +9,26 @@ const BrandCard = ({item}) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.imageContainer}>
-        <Image source={item?.image} />
+        {
+          item?.image && <Image source={item?.image} />
+        }
+        
       </View>
       <View style={styles.infoContainer}>
-        <Text preset="SemiBoldLg">{item?.name}</Text>
+        <Text preset="SemiBoldLg">{item?.collectionName}</Text>
         <Text preset="MediumSm" customStyles={{color: colors.gray}}>
           {item.follower}K Followers
         </Text>
       </View>
       <View style={{marginTop: metrics.spacing.m}}>
-      <Button
-        customStyles={{
-          paddingHorizontal: metrics.spacing.l,
-          paddingVertical: metrics.spacing.xs,
-        }}
-        title="Follow"
-        onPress={() => {}}
-      />
+        <Button
+          customStyles={{
+            paddingHorizontal: metrics.spacing.l,
+            paddingVertical: metrics.spacing.xs,
+          }}
+          title="Follow"
+          onPress={() => {}}
+        />
       </View>
     </View>
   );

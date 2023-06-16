@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStateValue } from './useStateValue';
-import { removeData, storeData } from '../../../storage/asyncStore';
+import { removeBrands, removeData, storeData } from '../../../storage/asyncStore';
 import { showMessage } from "react-native-flash-message";
 
 const useAuthFunction = () => {
@@ -20,6 +20,7 @@ const useAuthFunction = () => {
             user: false
         });
         removeData();
+        removeBrands();
         showMessage({
             message: "Logout",
             type: "danger",

@@ -16,10 +16,12 @@
     }
   },
   "addBrand": {
+    "caption": "Create New Collection",
     "addBrandForm" : {
       "imageHolder": "Image Link",
       "collectionHolder": "Collection Name",
-      "desHolder": "Description"
+      "desHolder": "Description",
+      "submit": "Create New"
 
     }
   }

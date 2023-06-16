@@ -4,10 +4,18 @@ import {defaultBrands} from 'features/deleted-list/data/brand.data';
 import Text from 'components/common/text/Text';
 import BrandCard from './BrandCard';
 import {metrics} from 'theme/metrics';
-import { colors } from 'theme/colors';
+import {colors} from 'theme/colors';
 const NUM_COLUM = 2;
-const BrandList = () => {
-  const renderItem = useCallback(({item}) => item.empty ? <View style={[styles.cardContainer,styles.itemInvisible]}/> : <BrandCard item={item} />, []);
+const BrandList = ({data}) => {
+  const renderItem = useCallback(
+    ({item}) =>
+      item.empty ? (
+        <View style={[styles.cardContainer, styles.itemInvisible]} />
+      ) : (
+        <BrandCard item={item} />
+      ),
+    [],
+  );
   const ListEmptyComponent = () => {
     return <Text>I am empty</Text>;
   };
@@ -16,23 +24,24 @@ const BrandList = () => {
     [],
   );
 
-
   const formatData = (data, numColumns) => {
-    const numberOfFullRows = Math.floor(data.length / numColumns);
-  
-    let numberOfElementsLastRow = data.length - (numberOfFullRows * numColumns);
-    while (numberOfElementsLastRow !== numColumns && numberOfElementsLastRow !== 0) {
-      data.push({ key: `blank-${numberOfElementsLastRow}`, empty: true });
+    const numberOfFullRows = Math.floor(data?.length / numColumns);
+
+    let numberOfElementsLastRow = data?.length - numberOfFullRows * numColumns;
+    while (
+      numberOfElementsLastRow !== numColumns &&
+      numberOfElementsLastRow !== 0
+    ) {
+      data?.push({key: `blank-${numberOfElementsLastRow}`, empty: true});
       numberOfElementsLastRow++;
     }
-  
+
     return data;
   };
 
-  
   return (
     <FlatList
-      data={formatData(defaultBrands, NUM_COLUM) || []}
+      data={formatData(data, NUM_COLUM) || []}
       renderItem={renderItem}
       keyExtractor={(item, index) => String(index)}
       ItemSeparatorComponent={ItemSeparatorComponent}
